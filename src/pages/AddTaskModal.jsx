@@ -2,14 +2,14 @@ import { useForm } from 'react-hook-form';
 import Modal from '../components/ui/Modal';
 
 const AddTaskModal = ({isOpen, setIsOpen}) => {
-    const {register, handleSubmit} = useForm();
+    const {register, handleSubmit, reset} = useForm();
 
     const onSubmit = (data) => {
     
     onCancel();
   };
      const onCancel = () => {
-    //reset();
+    reset();
     setIsOpen(false);
   };
 
