@@ -31,27 +31,18 @@ const taskSlice = createSlice({
         });
       }
     },
-    removeTask: (state, payload) => {
-      state.tasks.filter((item) => item.id !== payload);
+    removeTask: (state, { payload }) => {
+      state.tasks = state.tasks.filter((item) => item.id !== payload.id);
     },
-    deleteTask: (state, { action }) => {
-      state.tasks = state.tasks.filter((task) => task.id !== action.payload);
-    },
-    updateTask: (state, action) => {
-      const updatedTask = state.tasks.find(
-        (task) => task.id === action.payload.id
-      );
+    updateTask: (state, { payload }) => {
+      const updatedTask = state.tasks.find((task) => task.id === payload.id);
       if (updatedTask) {
-        updatedTask.status = action.payload.status;
-        updatedTask.title = action.payload.title;
-        updatedTask.description = action.payload.description;
-        updatedTask.date = action.payload.date;
-        updatedTask.assignedTo = action.payload.assignedTo;
-        updatedTask.priority = action.payload.priority;
+        // updatedTask.status = payload.status;
+        updatedTask.status = payload.status;
       }
     },
   },
 });
-export const { addTask, removeTask } = taskSlice.actions; // export the action creator
+export const { addTask, removeTask, updateTask } = taskSlice.actions; // export the action creator
 
 export default taskSlice.reducer;
