@@ -13,6 +13,7 @@ const initialState = {
       priority: "high",
     },
   ], // Array of tasks
+  userSpecificTask: [], // Array of user tasks
 };
 const taskSlice = createSlice({
   name: "taskSlice",
@@ -41,8 +42,13 @@ const taskSlice = createSlice({
         updatedTask.status = payload.status;
       }
     },
+    userTask: (state, { payload }) => {
+      state.userSpecificTask = state.tasks.filter(
+        (item) => item.assignedTo === payload
+      );
+    },
   },
 });
-export const { addTask, removeTask, updateTask } = taskSlice.actions; // export the action creator
+export const { addTask, removeTask, updateTask, userTask } = taskSlice.actions; // export the action creator
 
 export default taskSlice.reducer;
